@@ -1,4 +1,10 @@
 {% extends "to_do_app/base.html" %}
 {% block content %}
-    Hello
+<h1>Sign Up</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Sign Up</button>
+</form>
 {% endblock content %}
