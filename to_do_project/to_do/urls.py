@@ -19,7 +19,7 @@ from to_do_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('', views.index, name='index'),
     #Auth
     path('signup/', views.user_signup, name='user_signup')
 
