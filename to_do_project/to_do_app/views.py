@@ -2,9 +2,10 @@ from logging import log
 import re
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.contrib.messages import constants as messages
 # Create your views here.
 
 def index(request):
@@ -29,3 +30,10 @@ def user_signup(request):
 
 def current_todos(request):
         return render(request,'to_do_app/current_todos.html')
+
+def logout_user(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('index')
+        # messages.info(request, "Logged out successfully!")
+    

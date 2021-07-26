@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     #Auth
     path('signup/', views.user_signup, name='user_signup'),
+    path("logout_user/", views.logout_user, name="logout_user"),
+
     #Todos
-    path('current_todos/', views.current_todos, name='current_todos')
-]
+    path('current_todos/', views.current_todos, name='current_todos'),]
