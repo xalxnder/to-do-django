@@ -23,6 +23,8 @@ urlpatterns = [
     #Auth
     path('signup/', views.user_signup, name='user_signup'),
     path("logout_user/", views.logout_user, name="logout_user"),
+    path("login_user/", views.logout_user, name="login_user"),
+
 
     #Todos
     path('current_todos/', views.current_todos, name='current_todos'),]
