@@ -1,7 +1,7 @@
 from logging import log
 import re
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -38,12 +38,8 @@ def logout_user(request):
         # messages.info(request, "Logged out successfully!")
 
 def login_user(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return redirect('index')
-    else:
-        pass
-        # Return an 'invalid login' error message.
+    if request.method == 'GET':
+        return render(request, 'to_do_app/login_user.html', {'form':AuthenticationForm()})
+    # else:
+    #   pass
+    #         # Return an 'invalid login' error message.
