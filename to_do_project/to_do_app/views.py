@@ -40,6 +40,12 @@ def logout_user(request):
 def login_user(request):
     if request.method == 'GET':
         return render(request, 'to_do_app/login_user.html', {'form':AuthenticationForm()})
-    # else:
-    #   pass
-    #         # Return an 'invalid login' error message.
+    else:
+    #Check if initial password and confirmation password match
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'to_do_app/login_user.html', {'form':AuthenticationForm(),
+            'error':'INVALID CREDNTIALS'})
+        else:
+            login(request,user)
+            return redirect('current_todos')
