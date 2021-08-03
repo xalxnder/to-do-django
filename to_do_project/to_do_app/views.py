@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.messages import constants as messages
+from .forms import ToDoForm
 # Create your views here.
 
 def index(request):
@@ -49,3 +50,21 @@ def login_user(request):
         else:
             login(request,user)
             return redirect('current_todos')
+
+def create_todo(request):
+    if request.method == 'GET':
+        return render(request, 'to_do_app/create_todo.html', {'form':ToDoForm()})
+    else:
+        try:
+            form = ToDoForm(request.POST)
+            #Create a new ToDo object, but DONT save it to the DB
+            newtodo = form.save(commit=False)
+            newtodo.user = request.user
+            newtodo.save()
+            return redirect('current_todos')
+        except ValueError:
+            return render(request, 'to_do_app/create_todo.html', {'form':ToDoForm(), 'error': 'Bad data'})
+
+
+
+

@@ -1,0 +1,12 @@
+{% extends "to_do_app/base.html" %}
+{% block content %}
+<h1>Create Your ToDo</h1>
+<h2>{{ error }}</h2>
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit">Create ToDo ! </button>
+</form>
+{% endblock content %}
