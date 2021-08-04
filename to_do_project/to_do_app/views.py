@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.messages import constants as messages
 from .forms import ToDoForm
+from .models import ToDos
 # Create your views here.
 
 def index(request):
@@ -30,7 +31,8 @@ def user_signup(request):
             return render(request,'to_do_app/user_signup.html',{'form':UserCreationForm(), 'error':'Passwords do not match'})
 
 def current_todos(request):
-        return render(request,'to_do_app/current_todos.html')
+    todos = ToDos.objects.filter(user = request.user, date_completed__isnull = True)
+    return render(request,'to_do_app/current_todos.html', {'todos':todos})
 
 def logout_user(request):
     if request.method == 'POST':
