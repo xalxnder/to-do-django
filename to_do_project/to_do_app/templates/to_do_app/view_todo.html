@@ -1,0 +1,13 @@
+{% extends "to_do_app/base.html" %}
+{% block content %}
+<h1>These are your todos</h1>
+{{ error }}
+
+{{ todo.title }}
+<form method="POST">
+    {{% csrf_token %}}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+{% endblock content %}
