@@ -71,7 +71,7 @@ def create_todo(request):
 
 
 def view_todo(request, todo_pk):
-    todo = get_object_or_404(ToDos, pk=todo_pk)
+    todo = get_object_or_404(ToDos, pk=todo_pk, user= request.user)
     if request.method =='GET':
         form = ToDoForm(instance=todo)
         return render(request,'to_do_app/view_todo.html', {'todo':todo, 'form':form})
